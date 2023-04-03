@@ -32,6 +32,6 @@ I welcome feedback, so tell me what you think of this mod!
 
 #### Credits
 
-me
+me  
 the fabric wiki and discord members for their invaluable help 
 
