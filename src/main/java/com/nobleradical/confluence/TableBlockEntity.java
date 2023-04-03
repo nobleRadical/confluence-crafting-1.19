@@ -44,11 +44,12 @@ public class TableBlockEntity extends BlockEntity implements ImplementedInventor
         //use this to prevent items from consolidating
         if (world.isClient()) return;
         if (world.getTime() % 5 != 0) return;
-        List<ItemEntity> entityItems = world.getEntitiesByClass(ItemEntity.class, new Box(pos.up(2).north().west(), pos.down().south().east()), EntityPredicates.VALID_ENTITY);
+        List<ItemEntity> entityItems = world.getEntitiesByClass(ItemEntity.class, new Box(pos.up(2).north().west(), pos.up().south(2).east(2)), EntityPredicates.VALID_ENTITY);
         for (ItemEntity item : entityItems) {
-            // item. do not merge please. I not know how. And now I need mixin. rip me.
+            // initial pickup delay set to 100 ticks (5 seconds) for less accidental pickup
+            if (!item.getScoreboardTags().contains("doNotClump")) item.setPickupDelay(100);
+            // combined with the mixin this does not let items clump up
             item.addScoreboardTag("doNotClump");
-            item.setPickupDelay(100);
         }
     }
     
